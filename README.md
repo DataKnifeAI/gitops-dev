@@ -4,7 +4,7 @@ Development tools deployed to the **prd-apps** Kubernetes cluster via GitOps.
 
 ## Overview
 
-This repository contains GitOps configurations for developer-focused tools that run on the production applications cluster. Each tool is deployed using declarative manifests (Helm charts, Kustomize) and follows the same patterns used in [gitops-tools](https://github.com/surrealwolf/gitops-tools).
+This repository contains GitOps configurations for developer-focused tools that run on the production applications cluster. Each tool is deployed using declarative manifests (Helm charts, Kustomize) and follows the same patterns used in [gitops-tools](https://github.com/DataKnifeAI/gitops-tools).
 
 ## Target Cluster
 
@@ -70,4 +70,4 @@ Configure a Fleet GitRepo to monitor this repository and target the `prd-apps` c
 1. Create a new directory (e.g., `tool-name/`)
 2. Add `base/` and `overlays/prd-apps/` structure
 3. Update this README with the new tool
-4. Follow existing patterns from `coder/` and [gitops-tools](https://github.com/surrealwolf/gitops-tools)
+4. Follow existing patterns from `coder/` and [gitops-tools](https://github.com/DataKnifeAI/gitops-tools)
