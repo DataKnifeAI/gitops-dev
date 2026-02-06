@@ -1,0 +1,9 @@
+# Fleet configuration - targets prd-apps cluster
+# Fleet looks for fleet.yaml at the path root (coder/)
+defaultNamespace: coder
+
+targetCustomizations:
+  - name: prd-apps
+    clusterSelector:
+      matchLabels:
+        management.cattle.io/cluster-display-name: prd-apps

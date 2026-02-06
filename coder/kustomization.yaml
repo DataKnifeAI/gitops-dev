@@ -1,0 +1,8 @@
+# Root kustomization for Fleet - includes prd-apps overlay
+# Fleet processes path "coder" and runs kustomize build here
+# The overlay references ../../base which resolves to coder/base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - overlays/prd-apps
