@@ -1,10 +1,14 @@
 # Fleet configuration for prd-apps
 # Self-contained overlay - Fleet path: coder/overlays/prd-apps
-#
-defaultNamespace: coder
-
-targetCustomizations:
-  - name: prd-apps
-    clusterSelector:
-      matchLabels:
-        management.cattle.io/cluster-display-name: prd-apps
+# Uses same pattern as gitops-core cert-manager overlays
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: coder-prd-apps
+  labels:
+    fleet.cattle.io/bundle-name: coder-prd-apps
+spec:
+  targetRestrictions:
+    - clusterSelector:
+        matchLabels:
+          management.cattle.io/cluster-display-name: prd-apps
