@@ -1,0 +1,9 @@
+# Secrets - never commit
+*-credentials.yaml
+!*-credentials.yaml.example
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

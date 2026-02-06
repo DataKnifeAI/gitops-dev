@@ -1,0 +1,10 @@
+# Fleet configuration for prd-apps
+# Deploys Coder + CloudNativePG PostgreSQL to prd-apps cluster
+#
+defaultNamespace: coder
+
+targetCustomizations:
+  - name: prd-apps
+    clusterSelector:
+      matchLabels:
+        management.cattle.io/cluster-display-name: prd-apps
