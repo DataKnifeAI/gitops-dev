@@ -7,6 +7,11 @@ kind: HelmChart
 metadata:
   name: coder
   namespace: coder
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: gitops-dev-prd-apps-coder
+    meta.helm.sh/release-namespace: coder
 spec:
   chart: coder
   repo: https://helm.coder.com/v2
