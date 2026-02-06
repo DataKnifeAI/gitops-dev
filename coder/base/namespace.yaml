@@ -7,5 +7,5 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     managed-by: gitops
   annotations:
-    meta.helm.sh/release-name: coder
+    meta.helm.sh/release-name: gitops-dev-prd-apps-coder
     meta.helm.sh/release-namespace: coder
