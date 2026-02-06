@@ -1,5 +1,3 @@
-# Fleet configuration - targets prd-apps cluster
-# Fleet looks for fleet.yaml at the path root (coder/)
 defaultNamespace: coder
 
 targetCustomizations:

@@ -1,0 +1,13 @@
+# Fleet entry point - single bundle for prd-apps
+# Path "coder/prd-apps" avoids recursive discovery of overlays/
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: coder
+
+resources:
+  - ../base
+
+commonLabels:
+  managed-by: gitops
+  cluster: prd-apps

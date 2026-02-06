@@ -4,4 +4,8 @@ metadata:
   name: coder
   labels:
     app.kubernetes.io/name: coder
+    app.kubernetes.io/managed-by: Helm
     managed-by: gitops
+  annotations:
+    meta.helm.sh/release-name: coder
+    meta.helm.sh/release-namespace: coder
