@@ -22,6 +22,35 @@ spec:
               key: url
         - name: CODER_OAUTH2_GITHUB_DEFAULT_PROVIDER_ENABLE
           value: "false"
+        - name: CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS
+          value: "true"
+        - name: CODER_OAUTH2_GITHUB_ALLOWED_ORGS
+          value: "DataKnifeAI"
+        - name: CODER_OAUTH2_GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: coder-github-oauth
+              key: client-id
+        - name: CODER_OAUTH2_GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: coder-github-oauth
+              key: client-secret
+        - name: CODER_ACCESS_URL
+          value: "https://coder.dataknife.net"
+      envUseClusterAccessURL: false
       service:
-        type: LoadBalancer
+        type: NodePort
         sessionAffinity: None
+      serviceAccount:
+        workspaceNamespaces:
+          - name: coder-workspaces
+      ingress:
+        enable: true
+        className: nginx
+        host: coder.dataknife.net
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+        tls:
+          enable: true

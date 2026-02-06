@@ -22,12 +22,39 @@ kubectl create secret generic coder-db-url -n coder \
   --from-literal=url="postgres://coder:YOUR_SECURE_PASSWORD@coder-postgres-rw.coder:5432/coder?sslmode=disable"
 ```
 
+## 3. coder-github-oauth (GitHub OAuth for DataKnifeAI)
+
+Required for GitHub sign-in. Create a [GitHub OAuth App](https://github.com/organizations/DataKnifeAI/settings/applications/new) in the DataKnifeAI org:
+
+- **Application name**: Coder (or Coder DataKnife)
+- **Homepage URL**: `https://coder.dataknife.net`
+- **Authorization callback URL**: `https://coder.dataknife.net`
+- **Account permissions** → Email addresses: Read-only
+
+Then create the secret:
+
+```bash
+kubectl create secret generic coder-github-oauth -n coder \
+  --from-literal=client-id='YOUR_GITHUB_CLIENT_ID' \
+  --from-literal=client-secret='YOUR_GITHUB_CLIENT_SECRET'
+```
+
+## 4. coder-workspaces namespace
+
+Create the workspace namespace (apply separately — Kustomize conflicts with multiple namespaces):
+
+```bash
+kubectl apply -f coder/base/workspace-namespace.yaml
+```
+
 ## Order of Operations
 
 1. Create the `coder` namespace (or let Kustomize create it)
 2. Create `coder-postgres-credentials`
 3. Create `coder-db-url`
-4. Apply the Coder manifests (postgres cluster will start, then Coder after DB is ready)
+4. Create `coder-github-oauth` (GitHub OAuth app + secret)
+5. Create `coder-workspaces` namespace: `kubectl apply -f coder/base/workspace-namespace.yaml`
+6. Apply the Coder manifests (postgres cluster will start, then Coder after DB is ready)
 
 ## Production Notes
 
