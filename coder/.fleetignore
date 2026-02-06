@@ -1,4 +1,0 @@
-# Exclude overlays from Fleet - root kustomization handles prd-apps
-# Overlays used for manual: kubectl apply -k coder/overlays/prd-apps
-overlays/
-overlays/*

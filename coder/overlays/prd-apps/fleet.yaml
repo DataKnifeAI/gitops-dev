@@ -1,5 +1,5 @@
 # Fleet configuration for prd-apps
-# Deploys Coder + CloudNativePG PostgreSQL to prd-apps cluster
+# Self-contained overlay - Fleet path: coder/overlays/prd-apps
 #
 defaultNamespace: coder
 

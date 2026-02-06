@@ -1,6 +1,5 @@
-# Coder Helm Chart - Base
+# Coder Helm Chart - prd-apps overlay
 # Docs: https://coder.com/docs/install/kubernetes
-# Chart: https://helm.coder.com/v2
 #
 apiVersion: helm.cattle.io/v1
 kind: HelmChart

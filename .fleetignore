@@ -1,2 +1,0 @@
-# Exclude overlays from Fleet - coder/kustomization.yaml is the single entry point
-coder/overlays

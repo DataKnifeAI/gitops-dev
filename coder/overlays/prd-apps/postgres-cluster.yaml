@@ -1,5 +1,4 @@
-# CloudNativePG Cluster for Coder
-# Pattern follows high-command-postgres in the cluster
+# CloudNativePG Cluster for Coder - 3 instances for HA
 # Requires: coder-postgres-credentials secret (username, password) in same namespace
 #
 # Connection URL for Coder:
