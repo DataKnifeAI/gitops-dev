@@ -2,6 +2,9 @@
 *-credentials.yaml
 !*-credentials.yaml.example
 
+# DB dumps
+*-dump.sql
+
 # Editor
 .idea/
 .vscode/
