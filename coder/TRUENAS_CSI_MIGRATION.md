@@ -67,6 +67,8 @@ kubectl rollout restart deployment -n coder -l app.kubernetes.io/name=coder
 
 No changes to `coder-db-url` — the cluster name and service stay the same.
 
+**NFS ownership fix:** TrueNAS CSI NFS mounts as root by default. The postgres cluster uses `pvcTemplate.mountOptions` (`all_squash`, `anonuid=26`, `anongid=26`) so the postgres user (UID 26) can own the data directory. Without this, initdb fails with "data directory has wrong ownership".
+
 ---
 
 ## 2. Migrate Coder Workspace PVCs

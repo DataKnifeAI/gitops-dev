@@ -21,6 +21,11 @@ spec:
   storage:
     size: 10Gi
     storageClass: truenas-csi-nfs
+    pvcTemplate:
+      mountOptions:
+        - all_squash
+        - anonuid=26
+        - anongid=26
   resources:
     requests:
       cpu: 250m
