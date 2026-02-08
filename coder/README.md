@@ -38,4 +38,4 @@ Visit the IP in your browser to create the first admin account. For production, 
 
 - [Install Coder on Kubernetes](https://coder.com/docs/install/kubernetes)
 - [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/current/)
-- [TRUENAS_CSI_MIGRATION.md](TRUENAS_CSI_MIGRATION.md) — Migrate from Democratic CSI to TrueNAS CSI
+- [docs/truenas-csi/migration.md](../docs/truenas-csi/migration.md) — Migrate from Democratic CSI to TrueNAS CSI

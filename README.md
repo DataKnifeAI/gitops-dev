@@ -20,6 +20,7 @@ Coder provides secure, on-demand development environments (workspaces) that run 
 - **Docs**: [Install Coder on Kubernetes](https://coder.com/docs/install/kubernetes)
 - **Path**: `coder/`
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) operator (same pattern as `high-command-postgres` in the cluster)
+- **Storage**: TrueNAS CSI NFS — see [docs/](docs/README.md)
 
 ## Prerequisites
 
@@ -40,6 +41,8 @@ gitops-dev/
 │       └── prd-apps/            # prd-apps cluster overlay
 │           ├── fleet.yaml
 │           └── kustomization.yaml
+├── docs/                        # Deployment and operations documentation
+│   └── truenas-csi/             # TrueNAS CSI driver patches and migration
 └── README.md
 ```
 
