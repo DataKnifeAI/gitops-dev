@@ -10,7 +10,7 @@ spec:
   chart: coder
   repo: https://helm.coder.com/v2
   targetNamespace: coder
-  version: "2.31.5"
+  version: "2.32.0"
   valuesContent: |-
     coder:
       env:
