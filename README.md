@@ -1,5 +1,8 @@
 # gitops-dev
 
+![GitOps development tools for prd-apps](docs/assets/gitops-dev-hero.jpg)
+
+
 Development tools deployed to the **prd-apps** Kubernetes cluster via GitOps.
 
 ## Overview
