@@ -25,6 +25,16 @@ Coder provides secure, on-demand development environments (workspaces) that run 
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) operator (same pattern as `high-command-postgres` in the cluster)
 - **Storage**: TrueNAS CSI NFS — see [docs/](docs/README.md)
 
+### [Slashbay](https://github.com/DataKnifeAI/slashbay) — Issue-webhook herald
+
+Slashbay receives GitHub/GitLab issue webhooks, triages with a cheap LLM, and berths a Coder `dkai-agent` workspace.
+
+- **Path**: `slashbay/`
+- **Namespace**: `slashbay`
+- **Image**: `harbor.dataknife.net/library/slashbay` (GitLab CI → Harbor `library`)
+- **Ingress**: `slashbay.dataknife.net` (webhooks)
+- **Secrets**: [slashbay/secrets/README.md](slashbay/secrets/README.md)
+
 ## Prerequisites
 
 - [CloudNativePG operator](https://cloudnative-pg.io/documentation/current/installation/) installed on the cluster
@@ -44,6 +54,11 @@ gitops-dev/
 │       └── prd-apps/            # prd-apps cluster overlay
 │           ├── fleet.yaml
 │           └── kustomization.yaml
+├── slashbay/
+│   ├── base/                    # Generic Slashbay manifests
+│   ├── overlays/
+│   │   └── prd-apps/            # Self-contained Fleet overlay
+│   └── secrets/                 # Secret examples (not live values)
 ├── docs/                        # Deployment and operations documentation
 │   └── truenas-csi/             # TrueNAS CSI driver patches and migration
 └── README.md
@@ -65,6 +80,7 @@ postgres://{user}:{password}@{cluster}-rw.{namespace}:5432/{database}?sslmode=di
 ```bash
 kubectl config use-context prd-apps
 kubectl apply -k coder/overlays/prd-apps/
+kubectl apply -k slashbay/overlays/prd-apps/
 ```
 
 ### Fleet (GitOps)
