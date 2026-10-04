@@ -34,6 +34,32 @@ kubectl get svc -n coder
 
 Visit the IP in your browser to create the first admin account. For production, set `CODER_ACCESS_URL` to your domain and configure TLS.
 
+## Database backups
+
+`coder-postgres` archives WAL continuously and takes a daily base backup (09:00 UTC) through the
+Barman Cloud plugin (installed by [gitops-core `cnpg-barman-cloud`](https://github.com/DataKnifeAI/gitops-core/tree/main/cnpg-barman-cloud)).
+
+- **Where**: `s3://rke2-backups/cnpg/prd-apps/coder-postgres/` on rustfs
+  (`https://rustfs.dataknife.net:30293`), 14 day retention — see `overlays/prd-apps/objectstore.yaml`.
+- **Credentials**: `cnpg-backup-rustfs` secret in `coder` (keys `ACCESS_KEY_ID`, `ACCESS_SECRET_KEY`),
+  created by hand, not in git.
+- **WAL cap**: `max_slot_wal_keep_size: 2GB` stops a broken replica's slot from filling the 10Gi volume.
+
+Check:
+
+```bash
+kubectl cnpg status coder-postgres -n coder
+kubectl -n coder get backups.postgresql.cnpg.io
+kubectl -n coder get clusters.postgresql.cnpg.io coder-postgres \
+  -o jsonpath='{.status.conditions[?(@.type=="ContinuousArchiving")].status}'
+kubectl cnpg backup coder-postgres -n coder --method=plugin --plugin-name=barman-cloud.cloudnative-pg.io  # on demand
+```
+
+Restore: create a new Cluster with `bootstrap.recovery.source` pointing at an `externalClusters`
+entry using plugin `barman-cloud.cloudnative-pg.io` with `barmanObjectName: coder-postgres-rustfs`
+and `serverName: coder-postgres` (optionally `recoveryTarget.targetTime` for PITR). Full example in
+the gitops-core README. Rebuild a single broken replica with `kubectl cnpg destroy coder-postgres <n> -n coder`.
+
 ## References
 
 - [Install Coder on Kubernetes](https://coder.com/docs/install/kubernetes)

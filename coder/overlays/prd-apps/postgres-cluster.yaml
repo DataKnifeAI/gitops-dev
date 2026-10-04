@@ -26,6 +26,16 @@ spec:
   storage:
     size: 10Gi
     storageClass: truenas-csi-nfs  # Cluster-level StorageClass (omit mapall + dataset 0777)
+  postgresql:
+    parameters:
+      # Cap WAL kept for lagging/broken replicas so a dead slot cannot fill the 10Gi volume.
+      max_slot_wal_keep_size: "2GB"
+  # WAL archiving + base backups to rustfs (ObjectStore in objectstore.yaml)
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: coder-postgres-rustfs
   resources:
     requests:
       cpu: 250m
