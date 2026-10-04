@@ -40,7 +40,7 @@ Visit the IP in your browser to create the first admin account. For production, 
 Barman Cloud plugin (installed by [gitops-core `cnpg-barman-cloud`](https://github.com/DataKnifeAI/gitops-core/tree/main/cnpg-barman-cloud)).
 
 - **Where**: `s3://rke2-backups/cnpg/prd-apps/coder-postgres/` on rustfs
-  (`https://rustfs.dataknife.net:30293`), 14 day retention — see `overlays/prd-apps/objectstore.yaml`.
+  (`https://rustfs.dataknife.net:30292`), 14 day retention — see `overlays/prd-apps/objectstore.yaml`.
 - **Credentials**: `cnpg-backup-rustfs` secret in `coder` (keys `ACCESS_KEY_ID`, `ACCESS_SECRET_KEY`),
   created by hand, not in git.
 - **WAL cap**: `max_slot_wal_keep_size: 2GB` stops a broken replica's slot from filling the 10Gi volume.
