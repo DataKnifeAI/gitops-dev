@@ -2,6 +2,8 @@
 
 Migrate Coder and its dependencies from Democratic CSI (`truenas-nfs`) to TrueNAS CSI NFS (`truenas-csi-nfs`).
 
+> **Done.** democratic-csi and the `truenas-nfs` StorageClass were removed from all clusters on 2026-10-04. Kept as history; the StorageClass and postgres notes below still apply.
+
 ## Current setup (post-migration)
 
 Postgres uses the **existing cluster-level** StorageClass `truenas-csi-nfs` with omit mapall + dataset permissions. The cluster config must have these parameters:
