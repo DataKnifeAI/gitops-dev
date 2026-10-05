@@ -36,6 +36,10 @@ spec:
       isWALArchiver: true
       parameters:
         barmanObjectName: coder-postgres-rustfs
+  # Roll the primary last by switching over to an already-updated replica
+  # (seconds of downtime) instead of restarting it in place.
+  primaryUpdateStrategy: unsupervised
+  primaryUpdateMethod: switchover
   resources:
     requests:
       cpu: 250m
