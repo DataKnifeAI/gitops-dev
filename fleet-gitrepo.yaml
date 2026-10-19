@@ -1,0 +1,32 @@
+# Fleet GitRepo — register this repo to deploy Coder + Slashbay to prd-apps
+# Apply to the cluster where Fleet runs (e.g. Rancher management cluster):
+#   kubectl apply -f fleet-gitrepo.yaml
+#
+# If a GitRepo named gitops-dev-prd-apps already exists, add the slashbay
+# path to spec.paths instead of creating a second GitRepo.
+#
+# Requires: Fleet installed, prd-apps cluster registered with label
+# management.cattle.io/cluster-display-name=prd-apps
+# Before Slashbay starts: create secrets — see slashbay/secrets/README.md
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: gitops-dev-prd-apps
+  namespace: fleet-default
+  labels:
+    app: gitops-dev
+    cluster: prd-apps
+    managed-by: gitops
+spec:
+  repo: https://github.com/DataKnifeAI/gitops-dev.git
+  branch: main
+  paths:
+    - coder/overlays/prd-apps
+    - slashbay/overlays/prd-apps
+  targets:
+    - clusterSelector:
+        matchLabels:
+          management.cattle.io/cluster-display-name: prd-apps
+  correctDrift:
+    enabled: true
+  keepResources: true
